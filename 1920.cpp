@@ -2,10 +2,10 @@
  * @ Author: Jinwoo Choi
  * @ Create Time: 2022-09-30 17:43:06
  * @ Modified by: Jinwoo Choi
- * @ Modified time: 2022-09-30 19:00:37
+ * @ Modified time: 2022-09-30 19:31:41
  * @ Problem name: 수 찾기
  * @ Solution: binary search
- * @ result:
+ * @ result: success
  */
 
 #include <stdio.h>
