@@ -2,11 +2,14 @@
  * @ Author: Jinwoo Choi
  * @ Create Time: 2022-10-05 17:52:27
  * @ Modified by: Jinwoo Choi
- * @ Modified time: 2022-10-05 18:39:57
+ * @ Modified time: 2022-10-06 20:19:32
  * @ Problem name: Hashing
  * @ Solution: -
- * @ result: score 50
+ * @ result: success
  */
+// 1.(a + b) mod n = {(a mod n) + (b mod n)} mod n
+// 2.(a - b) mod n = {(a mod n) - (b mod n)} mod n
+// 3.(a * b) mod n = {(a mod n) * (b mod n)} mod n
 
 #include <stdio.h>
 #include <cmath>
@@ -15,7 +18,7 @@
 using namespace std;
 int main()
 {
-    unsigned long long int H;
+    unsigned long long int H, r = 1;
     int N;
     char str[51];
     scanf("%d", &N);
@@ -23,8 +26,8 @@ int main()
     H = 0;
     for (int i = 0; i < N; i++)
     {
-        H += ((str[i] - 'a' + 1) * 0 << i);
-        H %= M;
+        H = (H + (str[i] - 'a' + 1) * r) % M;
+        r = (r * R) % M;
     }
     printf("%llu\n", H % M);
 }
