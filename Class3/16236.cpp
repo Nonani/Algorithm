@@ -2,7 +2,7 @@
  * @ Author: Jinwoo Choi
  * @ Create Time: 2022-10-09 14:52:38
  * @ Modified by: Jinwoo Choi
- * @ Modified time: 2022-10-09 17:03:38
+ * @ Modified time: 2022-10-09 17:06:25
  * @ Problem name: 아기 상어
  * @ Solution:
  * @ result:
