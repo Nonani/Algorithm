@@ -2,7 +2,7 @@
  * @ Author: Jinwoo Choi
  * @ Create Time: 2022-10-09 14:52:38
  * @ Modified by: Jinwoo Choi
- * @ Modified time: 2022-10-09 16:12:29
+ * @ Modified time: 2022-10-09 17:03:38
  * @ Problem name: 아기 상어
  * @ Solution:
  * @ result:
@@ -15,7 +15,14 @@ int N, X, Y;
 const int dx[4] = {0, -1, 1, 0};
 const int dy[4] = {1, 0, 0, -1};
 int map[MAP_SIZE][MAP_SIZE];
-queue<pair<int, int>> q;
+int visit[MAP_SIZE][MAP_SIZE];
+
+void fill_visit()
+{
+    for (int i = 0; i < N; i++)
+        for (int j = 0; j < N; j++)
+            visit[i][j] = 0;
+}
 void init()
 {
     scanf("%d", &N);
@@ -31,10 +38,36 @@ void init()
             }
         }
     }
-    q.push(make_pair(x, y));
+    q.push(make_pair(X, Y));
 }
-int next(int cnt, int cur_size, int x, int y)
+
+int bfs(int cnt, int cur_size, int x, int y, queue<pair<int, int>> q)
 {
+    pair<int, int> p = q.front();
+    q.pop();
+    if (map[p.second][p.first] == 0 || map[p.second][p.first] == cur_size)
+    {
+        int cost = 10000000;
+        for (int i = 0; i < 4; i++)
+        {
+            int next_x = p.first + dx[i];
+            int next_y = p.second + dy[i];
+
+            if (next_x >= 0 && next_x < N && next_y >= 0 && next_y < N && map[next_y][next_x] <= cur_size)
+            {
+                q.push(make_pair(next_x, next_y));
+                int tmp = bfs(cnt + 1, cur_size, next_x, next_y, q);
+                cost = (cost > tmp) ? tmp : cost;
+            }
+        }
+    }
+    else if (map[p.second][p.first] < cur_size)
+    {
+        map[p.second][p.first] = 0;
+        return cnt + 1;
+    }
+
+    return cost;
 }
 void solve()
 {
@@ -46,7 +79,14 @@ void solve()
                 이동거리를 더한다
                 상어 크기를 1 늘린다
     */
-    bfs(0, 2, X, Y);
+    int answer = 0;
+    int cur_size = 1;
+    while (X != -1 && Y != -1)
+    {
+        queue<pair<int, int>> q;
+        q.push(make_pair(X, Y));
+        answer += bfs(0, ++cur_size, X, Y, q);
+    }
 }
 int main()
 {
