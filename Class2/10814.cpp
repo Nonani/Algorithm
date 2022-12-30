@@ -11,7 +11,7 @@
 #include <vector>
 #include <algorithm>
 using namespace std;
-
+ 
 bool compare(pair<int, char *> a, pair<int, char *> b)
 {
 
